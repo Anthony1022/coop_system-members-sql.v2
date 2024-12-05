@@ -69,6 +69,11 @@ public class Supplier extends FXModel {
     @Override
     public void copy(FXModel arg0) {
         Supplier c = (Supplier) arg0;
+
+            setSuppleirID(c.getSuppleirID());
+            setSuppleirName(c.getAdress());
+            setAddress(c.getAdress());
+        
     }
 
 }

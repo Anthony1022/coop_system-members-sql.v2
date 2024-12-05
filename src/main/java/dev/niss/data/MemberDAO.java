@@ -1,7 +1,6 @@
 package dev.niss.data;
 
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,10 +10,13 @@ import dev.niss.App;
 import dev.niss.models.hr.Member;
 import dev.sol.db.DBParam;
 import dev.sol.db.DBService;
+import dev.sol.db.DBType;
 
 public class MemberDAO {
     public static final String TABLE = "member";
     public static final DBService DB = App.DB_COOP;
+
+    
 
     private static Member data(CachedRowSet crs) {
         try {
@@ -50,24 +52,24 @@ public class MemberDAO {
 
     private static DBParam[] paramlist(Member member) {
         List<DBParam> paramlist = new LinkedList<>();
-        paramlist.add(new DBParam(Types.INTEGER, "memberID", member.getMemberID()));
-        paramlist.add(new DBParam(Types.VARCHAR, "Fname", member.getFname()));
-        paramlist.add(new DBParam(Types.VARCHAR, "Lname", member.getLname()));
-        paramlist.add(new DBParam(Types.VARCHAR, "DateofBirth", member.getDateofBirth()));
-        paramlist.add(new DBParam(Types.VARCHAR, "PlaceofBirth", member.getPlaceofBirth()));
-        paramlist.add(new DBParam(Types.INTEGER, "Status", member.getStatus()));
-        paramlist.add(new DBParam(Types.VARCHAR, "CurrentAddress", member.getCurrentAddress()));
-        paramlist.add(new DBParam(Types.VARCHAR, "Occupation", member.getOccupation()));
-        paramlist.add(new DBParam(Types.INTEGER, "OfficeID", member.getOffice()));
-        paramlist.add(new DBParam(Types.DOUBLE, "Salary", member.getSalary()));
-        paramlist.add(new DBParam(Types.VARCHAR, "SourceofIncome", member.getSourceofincome()));
-        paramlist.add(new DBParam(Types.VARCHAR, "NearestRelative", member.getNearestRelative()));
-        paramlist.add(new DBParam(Types.VARCHAR, "Relationship", member.getRelationShip()));
-        paramlist.add(new DBParam(Types.VARCHAR, "Dependent", member.getDependent()));
-        paramlist.add(new DBParam(Types.INTEGER, "StockShare", member.getStockshare()));
-        paramlist.add(new DBParam(Types.DECIMAL, "StockAmount", member.getStockAmount()));
-        paramlist.add(new DBParam(Types.INTEGER, "StockPaid", member.getStockPaid()));
-        paramlist.add(new DBParam(Types.DECIMAL, "AmountPaid", member.getAmountPaid()));
+        paramlist.add(new DBParam(DBType.NUMERIC, "memberID", member.getMemberID()));
+        paramlist.add(new DBParam(DBType.TEXT, "Fname", member.getFname()));
+        paramlist.add(new DBParam(DBType.TEXT, "Lname", member.getLname()));
+        paramlist.add(new DBParam(DBType.TEXT, "DateofBirth", member.getDateofBirth()));
+        paramlist.add(new DBParam(DBType.TEXT, "PlaceofBirth", member.getPlaceofBirth()));
+        paramlist.add(new DBParam(DBType.TEXT, "Status", member.getStatus()));
+        paramlist.add(new DBParam(DBType.TEXT, "CurrentAddress", member.getCurrentAddress()));
+        paramlist.add(new DBParam(DBType.TEXT, "Occupation", member.getOccupation()));
+        paramlist.add(new DBParam(DBType.NUMERIC, "OfficeID", member.getOffice()));
+        paramlist.add(new DBParam(DBType.MONEY, "Salary", member.getSalary()));
+        paramlist.add(new DBParam(DBType.TEXT, "SourceofIncome", member.getSourceofincome()));
+        paramlist.add(new DBParam(DBType.TEXT, "NearestRelative", member.getNearestRelative()));
+        paramlist.add(new DBParam(DBType.TEXT, "Relationship", member.getRelationShip()));
+        paramlist.add(new DBParam(DBType.TEXT, "Dependent", member.getDependent()));
+        paramlist.add(new DBParam(DBType.NUMERIC, "StockShare", member.getStockshare()));
+        paramlist.add(new DBParam(DBType.DECIMAL, "StockAmount", member.getStockAmount()));
+        paramlist.add(new DBParam(DBType.NUMERIC, "StockPaid", member.getStockPaid()));
+        paramlist.add(new DBParam(DBType.DECIMAL, "AmountPaid", member.getAmountPaid()));
         return paramlist.toArray(new DBParam[0]);
     }
 
@@ -92,7 +94,7 @@ public class MemberDAO {
     }
 
     public static void delete(Member member) {
-        DB.delete(TABLE, new DBParam(Types.INTEGER, "memberID", member.getMemberID()));
+        DB.delete(TABLE, new DBParam(DBType.NUMERIC, "memberID", member.getMemberID()));
     }
 
 }

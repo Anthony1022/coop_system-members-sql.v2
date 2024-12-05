@@ -200,6 +200,8 @@ public class RootController extends FXController {
                 stockpaidField.setText(String.valueOf(nv.getStockPaid()));
                 stockamountField.setText(String.valueOf(nv.getStockAmount()));
                 amountField.setText(String.valueOf(nv.getAmountPaid()));
+                officeComboBox.setPromptText(String.valueOf(nv.getOffice()));
+                relationBox.setPromptText(String.valueOf(nv.getRelationShip()));
 
             } else {
                 idField.setText("");
