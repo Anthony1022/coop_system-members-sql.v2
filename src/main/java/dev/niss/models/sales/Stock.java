@@ -87,7 +87,7 @@ public class Stock extends FXModel {
     public FXDoubleProperty quantityProperty(){
         return quantity;
     }
-    public Double getQuanntity(){
+    public Double getQuantity(){
         return quantityProperty().get();
     }
     public void setQuantity(Double quantity){
@@ -118,7 +118,7 @@ public class Stock extends FXModel {
         getDesription(),
          getUnitPrice(), 
          getSellingPrice(), 
-         getQuanntity(), 
+         getQuantity(), 
          getUnit(), 
          getCriticalLevel());
          
@@ -126,8 +126,15 @@ public class Stock extends FXModel {
 
     @Override
     public void copy(FXModel arg0) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'copy'");
+        Stock c = (Stock) arg0;
+
+        setStockID(c.getStockID());
+        setDescription(c.getDesription());
+        setUnitPrice(c.getUnitPrice());
+        setSellingPrice(c.getSellingPrice());
+        setQuantity(c.getQuantity());
+        setUnit(c.getUnit());
+        setCriticalLevel(c.getCriticalLevel());
     }
 
 }

@@ -1,5 +1,10 @@
 package dev.niss.app;
 
+import java.util.Collections;
+import java.util.Comparator;
+
+import atlantafx.base.theme.Styles;
+import atlantafx.base.util.Animations;
 import dev.niss.App;
 import dev.niss.data.MemberDAO;
 import dev.niss.enums.CivilStatus;
@@ -23,161 +28,221 @@ public class RootController extends FXController {
     private TableView<Member> memberTable;
 
     @FXML
-    private TableColumn<Member, String> memberIdColumn;
-
-    @FXML
-    private TableColumn<Member, String> lnameColumn;
+    private TableColumn<Member, Integer> memberIdColumn;
 
     @FXML
     private TableColumn<Member, String> fnameColumn;
 
     @FXML
+    private TableColumn<Member, String> lnameColumn;
+
+    @FXML
     private TableColumn<Member, Long> amountpaidColumn;
+    @FXML
+    private TextField idField;
 
     @FXML
-    private TextField firstname;
+    private TextField fnameField;
 
     @FXML
-    private TextField middlename;
+    private TextField mnameField;
 
     @FXML
-    private TextField lastname;
+    private TextField lnameField;
 
     @FXML
-    private TextField birthdate;
+    private TextField bdayField;
 
     @FXML
-    private TextField birthplace;
+    private TextField placeField;
 
     @FXML
-    private ComboBox<CivilStatus> civilstatus;
+    private TextField homeField;
 
     @FXML
-    private TextField homeaddress;
+    private TextField occupationField;
 
     @FXML
-    private TextField occupation;
+    private TextField salaryField;
 
     @FXML
-    private ComboBox<Member> officeid;
+    private TextField incomeField;
 
     @FXML
-    private TextField salary;
+    private TextField relative;
 
     @FXML
-    private TextField income;
+    private TextField stockshareField;
 
     @FXML
-    private TextField relativefield;
+    private TextField stockamountField;
 
     @FXML
-    private ComboBox<Member> relationfield;
+    private TextField stockpaidField;
 
     @FXML
-    private TextField dependents;
+    private TextField amountField;
 
     @FXML
-    private TextField stockshare;
+    private TextField dependentField;
 
     @FXML
-    private TextField stockamount;
+    private ComboBox<String> civilBox;
 
     @FXML
-    private TextField stockpaid;
+    private ComboBox<String> officeComboBox;
 
     @FXML
-    private TextField amountpaid;
+    private ComboBox<Member> relationBox;
 
     @FXML
-    private TextField search;
+    private void handleAddMember() {
+        if (fnameField.getText().isEmpty()) {
+            fnameField.pseudoClassStateChanged(Styles.STATE_DANGER, true);
+            Animations.flash(fnameField).playFromStart();
+            return;
+        }
+        Collections.sort(member_masterlist, Comparator.comparing(Member::getMemberID));
+        int id_int = Integer.valueOf(member_masterlist.getLast().getMemberID()) + 1;
+        String memberId = Integer.toString(id_int);
+
+        // Member member = new Member(memberId,
+        // fnameField.getText(),
+        // mnameField.getText(),
+        // lnameField.getText(),
+        // bdayField.getText(),
+        // placeField.getText(),
+        // civilBox.getValue(),
+        // homeField.getText(),
+        // occupationField.getText(),
+        // officeComboBox.getValue()
+
+        // );
+
+        MemberDAO.insert(member);
+        member_masterlist.add(member);
+        reset_newEmployeeFields();
+    }
 
     @FXML
-    private void handleDelete() {
-        Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
-        if (memberTable.getSelectionModel().getSelectedItem() == null) {
+    private void handleSave() {
+
+    }
+
+    @FXML
+    private void handledelete() {
+        Member selectedmember = memberTable.getSelectionModel().getSelectedItem();
+        if (selectedmember == null) {
             Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Member Delete Error");
-            alert.setHeaderText("Null Selection Error Occurred");
-            alert.setContentText("No Member selected from table. Must select a Member to delete");
+            alert.setTitle("Fail to Delete");
+            alert.setHeaderText("No Selected Member");
+            alert.setContentText("Select First Before Deleting");
             alert.initOwner(scene.getWindow());
             alert.show();
             return;
         }
-        member_masterlist.remove(selectedMember);
-        MemberDAO.delete(selectedMember);
-
+        member_masterlist.remove(selectedmember);
+        MemberDAO.delete(selectedmember);
     }
 
-    private Member selectedmember;
-    private Scene scene;
+    private ObservableList<Member> memberList;
     private ObservableList<Member> member_masterlist;
+    private Member member;
     private FilteredList<Member> memberFilteredList;
 
-    @Override
-    protected void load_bindings() {
-        scene = (Scene) getParameter("SCENE");
-        member_masterlist = App.COLLECTIONS_REGISTER.getList("MEMBER");
-        memberFilteredList = new FilteredList<>(member_masterlist, p -> true);
-
-        memberIdColumn.setCellValueFactory(cell -> cell.getValue().memberIDProperty().asString());
-        lnameColumn.setCellValueFactory(cell -> cell.getValue().lnameProperty());
-        fnameColumn.setCellValueFactory(cell -> cell.getValue().fnameProperty());
-        amountpaidColumn.setCellValueFactory(cell -> cell.getValue().amountPaidProperty().asObject());
-
-         ObservableList<CivilStatus> joblList = FXCollections.observableArrayList(CivilStatus.values());
-        if (memberFilteredList.stream().anyMatch(e -> e.getCivil_Status().equals(CivilStatus.SINGEL))) {
-            civilstatus.setItems(FXCollections.observableArrayList(joblList.subList(1, joblList.size())));
-        } else
-            civilstatus.setItems(joblList);
-
-        memberTable.setItems(member_masterlist);
-    }
+    private Scene scene;
 
     @Override
     protected void load_fields() {
-        _bind_labelProperties();
+        scene = (Scene) getParameter("SCENE");
+        member_masterlist = App.COLLECTIONS_REGISTER.getList("MEMBER");
+        memberList = new FilteredList<>(member_masterlist, p -> true);
+
+        memberIdColumn.setCellValueFactory(cell -> cell.getValue().memberIDProperty().asObject());
+        fnameColumn.setCellValueFactory(cell -> cell.getValue().fnameProperty());
+        lnameColumn.setCellValueFactory(cell -> cell.getValue().lnameProperty());
+        amountpaidColumn.setCellValueFactory(cell -> cell.getValue().amountpaidProperty().asObject());
+
+        // ObservableList<CivilStatus> joblist =
+        // FXCollections.observableArrayList(CivilStatus.values());
+        // if (member_masterlist.stream().anyMatch(e ->
+        // e.getStatus().equals(CivilStatus.WIDOW))) {
+        // civilBox.setItems(FXCollections.observableArrayList(joblist.subList(1,
+        // joblist.size())));
+
+        // } else
+        // civilBox.setItems(joblist);
+
+        memberTable.setItems(member_masterlist);
+
+        memberTable.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
+            if (nv != null) {
+                idField.setText(String.valueOf(nv.getMemberID()));
+                fnameField.setText(nv.getFname());
+                mnameField.setText(nv.getMname());
+                lnameField.setText(nv.getLname());
+                bdayField.setText(nv.getDateofBirth());
+                placeField.setText(nv.getPlaceofBirth());
+                homeField.setText(nv.getCurrentAddress());
+                occupationField.setText(nv.getOccupation());
+
+                civilBox.setItems(FXCollections.observableArrayList());
+
+                CivilStatus status = CivilStatus.fromCode(nv.getStatus());
+
+                civilBox.setValue(status.getDsiplay());
+
+                salaryField.setText(String.valueOf(nv.getSalary()));
+                incomeField.setText(nv.getSourceofincome());
+                relative.setText(nv.getNearestRelative());
+                dependentField.setText(nv.getDependent());
+                stockshareField.setText(String.valueOf(nv.getStockshare()));
+                stockpaidField.setText(String.valueOf(nv.getStockPaid()));
+                stockamountField.setText(String.valueOf(nv.getStockAmount()));
+                amountField.setText(String.valueOf(nv.getAmountPaid()));
+
+            } else {
+                idField.setText("");
+                fnameField.setText("");
+                mnameField.setText("");
+                lnameColumn.setText("");
+                bdayField.setText("");
+                placeField.setText("");
+                homeField.setText("");
+                occupationField.setText("");
+                salaryField.setText("");
+                incomeField.setText("");
+                relative.setText("");
+                dependentField.setText("");
+                stockshareField.setText("");
+                stockpaidField.setText("");
+                stockamountField.setText("");
+                amountField.setText("");
+            }
+        });
+    }
+
+    @Override
+    protected void load_bindings() {
 
     }
 
     @Override
     protected void load_listeners() {
-
-        reset_CivilList();
-
         memberTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            selectedmember = newValue;
+            member = newValue;
             _bind_labelProperties();
         });
 
     }
 
-    private void _bind_labelProperties() {
-        if (selectedmember != null) {
-            firstname.textProperty().bind(selectedmember.fnameProperty());
-            lastname.textProperty().bind(selectedmember.lnameProperty());
-            middlename.textProperty().bind(selectedmember.mnameProperty());
-            birthdate.textProperty().bind(selectedmember.birthDateProperty());
-            birthplace.textProperty().bind(selectedmember.birthplaceProperty());
-             civilstatus.valueProperty().bind(selectedmember.civil_statusProperty());
-            homeaddress.textProperty().bind(selectedmember.homeAddressProperty());
-            occupation.textProperty().bind(selectedmember.occupationProperty());
-            // officeid.valueProperty().bind(selectedmember.officeProperty());
-            // salary.textProperty().bind(selectedmember.salaryProperty());
-            income.textProperty().bind(selectedmember.sourceofincomeProperty());
-            relativefield.textProperty().bind(selectedmember.relativeProperty());
-            //
-            dependents.textProperty().bind(selectedmember.dependentProperty());
-            // stockshare.textProperty().bind(selectedmember.stockshareProperty());
-            // stockamount.textProperty().bind(selectedmember.stockamountProperty());
-            // stockpaid.textProperty().bind(selectedmember.stockpaidProperty());
-            // amountpaid.textProperty().bind(selectedmember.amountPaidProperty());
-
-            
-        }
+    public void _bind_labelProperties() {
 
     }
-    private void reset_CivilList(){
-        civilstatus.getSelectionModel().selectFirst();
+
+    private void reset_newEmployeeFields() {
+        fnameField.setText("");
+        civilBox.getSelectionModel().selectFirst();
     }
 
 }

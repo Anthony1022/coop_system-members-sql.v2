@@ -1,14 +1,22 @@
 package dev.niss.enums;
 
 public enum CivilStatus {
-    SINGEL(0),
-    MARRIED(1),
-    WIDOW(2);
+    SINGLE(0, "Single"),
+    MARRIED(1, "Married"),
+    WIDOW(2, "Widow");
 
     private int code;
+    private String display;
 
-    private CivilStatus(int code) {
+    private CivilStatus(int code, String display) {
         this.code = code;
+        this.display = display;
+
+    }
+
+    public String getDsiplay() {
+        return this.display;
+
     }
 
     public int getCode() {
@@ -17,8 +25,8 @@ public enum CivilStatus {
 
     public static CivilStatus fromCode(int code) {
         return switch (code) {
-            case 0 -> CivilStatus.SINGEL;
-            case 1 -> CivilStatus.MARRIED;
+            case 0 -> CivilStatus.MARRIED;
+            case 1 -> CivilStatus.SINGLE;
             case 2 -> CivilStatus.WIDOW;
             default -> null;
         };

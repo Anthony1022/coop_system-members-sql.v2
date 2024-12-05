@@ -112,8 +112,13 @@ public class InVoice extends FXModel {
 
     @Override
     public void copy(FXModel arg0) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'copy'");
+        InVoice c = (InVoice) arg0;
+
+        setSalesID(c.getSalesID());
+        setInvoNum(c.getInvoNum());
+        setTotalAmt(c.getTotalAmt());
+        setMemberID(c.getMemberID());
+        setUserID(c.getUserID());
+        setDate(c.getDate());
     }
-    
 }

@@ -103,8 +103,13 @@ public class DeliveryItems extends FXModel {
 
 	@Override
 	public void copy(FXModel arg0) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'copy'");
+		DeliveryItems c = (DeliveryItems) arg0;
+
+		setDRID(c.getDRID());
+		setStockID(c.getStockID());
+		setBuyingP(c.getAmount());
+		setQTY(c.getQTY());
+		setAmount(c.getAmount());
 	}
 
 }

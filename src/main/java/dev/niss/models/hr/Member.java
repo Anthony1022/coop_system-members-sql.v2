@@ -1,364 +1,330 @@
 package dev.niss.models.hr;
 
-import dev.niss.enums.CivilStatus;
 import dev.sol.core.application.FXModel;
 import dev.sol.core.properties.beans.FXDoubleProperty;
 import dev.sol.core.properties.beans.FXIntegerProperty;
 import dev.sol.core.properties.beans.FXLongProperty;
-import dev.sol.core.properties.beans.FXObjectProperty;
 import dev.sol.core.properties.beans.FXStringProperty;
 
 public class Member extends FXModel {
 
-    private final FXIntegerProperty memberId;
-    private final FXStringProperty lname;
-    private final FXStringProperty fname;
+    private final FXIntegerProperty memberid;
+    private final FXStringProperty Fname;
     private final FXStringProperty Mname;
-    private final FXStringProperty birthDate;
-    private final FXStringProperty birthplace;
-    private final FXObjectProperty<CivilStatus> status;
-    private final FXStringProperty homeAddress;
-    private final FXStringProperty occupation;
-    private final FXIntegerProperty office;
-    private final FXDoubleProperty salary;
-    private final FXStringProperty sourceofincome;
-    private final FXStringProperty relative;
-    private final FXStringProperty relationship;
-    private final FXStringProperty dependent;
-    private final FXIntegerProperty stockshare;
-    private final FXLongProperty stockamount;
-    private final FXLongProperty stockpaid;
-    private final FXLongProperty amountPaid;
+    private final FXStringProperty Lname;
+    private final FXStringProperty DateofBirth;
+    private final FXStringProperty PlaceofBirth;
+    private final FXIntegerProperty Status;
+    private final FXStringProperty CurrentAddress;
+    private final FXStringProperty Occupation;
+    private final FXIntegerProperty Office;
+    private final FXDoubleProperty Salary;
+    private final FXStringProperty Sourceofincome;
+    private final FXStringProperty Nearestrelative;
+    private final FXStringProperty RelationShip;
+    private final FXStringProperty Dependent;
+    private final FXIntegerProperty Stockshare;
+    private final FXLongProperty StockAmount;
+    private final FXIntegerProperty StockPaid;
+    private final FXLongProperty amountpaid;
 
-    public Member(Integer memberId,
-            String lname,
-            String fname,
+    public Member(Integer memberid,
+            String Fname,
             String Mname,
-            String birthDate,
-            String birthplace,
-            CivilStatus status,
-            String homeAddress,
-            String occupation,
-            Integer office,
-            Double salary,
-            String sourceofincome,
-            String relative,
-            String relationship,
-            String dependent,
-            Integer stockshare,
-            long stockamount,
-            long stockpaid,
-            long amountPaid) {
-        this.memberId = new FXIntegerProperty(memberId);
-        this.lname = new FXStringProperty(lname);
-        this.fname = new FXStringProperty(fname);
-        this.Mname = new FXStringProperty(Mname);
-        this.birthDate = new FXStringProperty(birthDate);
-        this.birthplace = new FXStringProperty(birthplace);
-        this.status = new FXObjectProperty<>(status);
-        this.homeAddress = new FXStringProperty(homeAddress);
-        this.occupation = new FXStringProperty(occupation);
-        this.office = new FXIntegerProperty(office);
-        this.salary = new FXDoubleProperty(salary);
-        this.sourceofincome = new FXStringProperty(sourceofincome);
-        this.relative = new FXStringProperty(relative);
-        this.relationship = new FXStringProperty(relationship);
-        this.dependent = new FXStringProperty(dependent);
-        this.stockshare = new FXIntegerProperty(stockshare);
-        this.stockamount = new FXLongProperty(stockamount);
-        this.stockpaid = new FXLongProperty(stockpaid);
-        this.amountPaid = new FXLongProperty(amountPaid);
+            String Lname,
+            String DateofBirth,
+            String PlaceofBirth,
+            int Status,
+            String CurrentAddress,
+            String Occupation,
+            Integer Office,
+            double Salary,
+            String Sourceofincome,
+            String Nearestrelative,
+            String RelationShip,
+            String Dependent,
+            Integer Stockshare,
+            long StockAmount,
+            Integer StockPaid,
+            long amountpaid) {
 
-        track_properties(this.memberId,
-                this.lname,
-                this.fname,
+        this.memberid = new FXIntegerProperty(memberid);
+        this.Fname = new FXStringProperty(Fname);
+        this.Mname = new FXStringProperty(Mname);
+        this.Lname = new FXStringProperty(Lname);
+        this.DateofBirth = new FXStringProperty(DateofBirth);
+        this.PlaceofBirth = new FXStringProperty(PlaceofBirth);
+        this.Status = new FXIntegerProperty(Status);
+        this.CurrentAddress = new FXStringProperty(CurrentAddress);
+        this.Occupation = new FXStringProperty(Occupation);
+        this.Office = new FXIntegerProperty(Office);
+        this.Salary = new FXDoubleProperty(Salary);
+        this.Sourceofincome = new FXStringProperty(Sourceofincome);
+        this.Nearestrelative = new FXStringProperty(Nearestrelative);
+        this.RelationShip = new FXStringProperty(RelationShip);
+        this.Dependent = new FXStringProperty(Dependent);
+        this.Stockshare = new FXIntegerProperty(Stockshare);
+        this.StockAmount = new FXLongProperty(StockAmount);
+        this.StockPaid = new FXIntegerProperty(StockPaid);
+        this.amountpaid = new FXLongProperty(amountpaid);
+
+        track_properties(this.memberid,
+                this.Fname,
                 this.Mname,
-                this.birthDate,
-                this.birthplace,
-                this.status,
-                this.homeAddress,
-                this.occupation,
-                this.office,
-                this.salary,
-                this.sourceofincome,
-                this.relative,
-                this.relationship,
-                this.dependent,
-                this.stockshare,
-                this.stockamount,
-                this.stockpaid,
-                this.amountPaid);
+                this.Lname,
+                this.DateofBirth,
+                this.PlaceofBirth,
+                this.Status,
+                this.CurrentAddress,
+                this.Occupation,
+                this.Office,
+                this.Salary,
+                this.Sourceofincome,
+                this.Nearestrelative,
+                this.RelationShip,
+                this.Dependent,
+                this.Stockshare,
+                this.StockAmount,
+                this.StockPaid,
+                this.amountpaid);
     }
 
-    // memberID
     public FXIntegerProperty memberIDProperty() {
-        return memberId;
+        return memberid;
     }
 
     public Integer getMemberID() {
         return memberIDProperty().get();
     }
 
-    public void setMemberID(Integer memberId) {
-        memberIDProperty().set(memberId);
+    public void setMemberID(Integer memberid) {
+        memberIDProperty().set(memberid);
     }
 
-    // lname
-    public FXStringProperty lnameProperty() {
-        return lname;
-    }
-
-    public String getLname() {
-        return lnameProperty().get();
-    }
-
-    public void setLname(String lname) {
-        lnameProperty().set(lname);
-    }
-
-    // fname
     public FXStringProperty fnameProperty() {
-        return fname;
+        return Fname;
     }
 
     public String getFname() {
         return fnameProperty().get();
     }
 
-    public void setFname(String fname) {
-        fnameProperty().set(fname);
+    public void setFname(String Fname) {
+        fnameProperty().set(Fname);
     }
 
-    // middlename
     public FXStringProperty mnameProperty() {
         return Mname;
     }
 
     public String getMname() {
-        return fnameProperty().get();
+        return mnameProperty().get();
     }
 
     public void setMname(String Mname) {
         mnameProperty().set(Mname);
     }
 
-    // birthDate
-    public FXStringProperty birthDateProperty() {
-        return birthDate;
+    public FXStringProperty lnameProperty() {
+        return Lname;
     }
 
-    public String getBirthDate() {
-        return birthDateProperty().get();
+    public String getLname() {
+        return lnameProperty().get();
     }
 
-    public void setBirthDate(String birthDate) {
-        birthDateProperty().set(birthDate);
+    public void setLname(String Lname) {
+        lnameProperty().set(getLname());
     }
 
-    // birthplace
-    public FXStringProperty birthplaceProperty() {
-        return birthplace;
+    public FXStringProperty dateofBirthProperty() {
+        return DateofBirth;
     }
 
-    public String getBirthPlace() {
-        return birthplaceProperty().get();
+    public String getDateofBirth() {
+        return dateofBirthProperty().get();
     }
 
-    public void setBirthPlace(String birthplace) {
-        birthplaceProperty().set(birthplace);
+    public void setDateofBirth(String DateofBirth) {
+        dateofBirthProperty().set(DateofBirth);
     }
 
-    // civil_status
-    public FXObjectProperty<CivilStatus> civil_statusProperty() {
-        return status;
+    public FXStringProperty placeofBirthProperty() {
+        return PlaceofBirth;
     }
 
-    public CivilStatus getCivil_Status() {
-        return civil_statusProperty().get();
+    public String getPlaceofBirth() {
+        return placeofBirthProperty().get();
     }
 
-    public void setCivil_Status(CivilStatus civilStatus) {
-        civil_statusProperty().set(civilStatus);
+    public void setPlaceofBirth(String PlaceofBirth) {
+        placeofBirthProperty().set(getDateofBirth());
     }
 
-    // homeAddress
-    public FXStringProperty homeAddressProperty() {
-        return homeAddress;
+    public FXIntegerProperty statusProperty() {
+        return Status;
     }
 
-    public String getHomeAddress() {
-        return homeAddressProperty().get();
+    public int getStatus() {
+        return statusProperty().get();
     }
 
-    public void setHomeAddress(String homeAddress) {
-        homeAddressProperty().set(homeAddress);
+    public void setStatus(int Status) {
+        statusProperty().set(Status);
     }
 
-    // occupation
+    public FXStringProperty CurrentAddressProperty() {
+        return CurrentAddress;
+    }
+
+    public String getCurrentAddress() {
+        return CurrentAddressProperty().get();
+    }
+
+    public void setCurrentAddress(String CurrentAddress) {
+        CurrentAddressProperty().set(CurrentAddress);
+    }
+
     public FXStringProperty occupationProperty() {
-        return occupation;
+        return Occupation;
     }
 
     public String getOccupation() {
         return occupationProperty().get();
     }
 
-    public void setOccupation(String occupation) {
-        occupationProperty().set(occupation);
+    public void setOccupation(String Occupation) {
+        occupationProperty().set(Occupation);
     }
 
-    // office
-    public FXIntegerProperty officeProperty() {
-        return office;
+    public FXIntegerProperty OfficeProperty() {
+        return Office;
     }
 
     public Integer getOffice() {
-        return officeProperty().get();
+        return OfficeProperty().get();
     }
 
-    public void setOffice(Integer office) {
-        officeProperty().set(office);
+    public void setOffice(Integer Office) {
+        OfficeProperty().set(Office);
     }
 
-    // salary
     public FXDoubleProperty salaryProperty() {
-        return salary;
+        return Salary;
     }
 
-    public Double getSalary() {
+    public double getSalary() {
         return salaryProperty().get();
     }
 
-    public void setSalary(double salary) {
-        salaryProperty().set(salary);
+    public void setSalary(double Salary) {
+        salaryProperty().set(Salary);
     }
 
-    // sourceofincome
     public FXStringProperty sourceofincomeProperty() {
-        return sourceofincome;
+        return Sourceofincome;
     }
 
-    public String getSourceOfIncome() {
+    public String getSourceofincome() {
         return sourceofincomeProperty().get();
     }
 
-    public void setSourceOfIncome(String sourceofincome) {
-        sourceofincomeProperty().set(sourceofincome);
+    public void setSourceofincome(String Sourceofincome) {
+        sourceofincomeProperty().set(getCurrentAddress());
     }
 
-    // relstive
-    public FXStringProperty relativeProperty() {
-        return relative;
+    public FXStringProperty nearestRelativeProperty() {
+        return Nearestrelative;
     }
 
-    public String getRelative() {
-        return relativeProperty().get();
+    public String getNearestRelative() {
+        return nearestRelativeProperty().get();
     }
 
-    public void setRelative(String relative) {
-        relativeProperty().set(relative);
+    public void setNearestRelative(String NearestRelative) {
+        nearestRelativeProperty().set(NearestRelative);
     }
 
-    // relationship
     public FXStringProperty relationshipProperty() {
-        return relationship;
+        return RelationShip;
     }
 
-    public String getRelationship() {
+    public String getRelationShip() {
         return relationshipProperty().get();
     }
 
-    public void setRelationship(String relationship) {
-        relationshipProperty().set(relationship);
+    public void setRelationShip(String RelationShip) {
+        relationshipProperty().set(getCurrentAddress());
     }
 
-    // dependent
     public FXStringProperty dependentProperty() {
-        return dependent;
+        return Dependent;
     }
 
     public String getDependent() {
         return dependentProperty().get();
     }
 
-    public void setDependent(String dependent) {
-        dependentProperty().set(dependent);
+    public void setDependent(String Dependent) {
+        dependentProperty().set(Dependent);
     }
 
-    // stockshare
     public FXIntegerProperty stockshareProperty() {
-        return stockshare;
+        return Stockshare;
     }
 
     public Integer getStockshare() {
         return stockshareProperty().get();
     }
 
-    public void setStockshare(Integer stockshare) {
-        stockshareProperty().set(stockshare);
+    public void setStockshare(Integer Stockshare) {
+        stockshareProperty().set(Stockshare);
     }
 
-    // stockamount
     public FXLongProperty stockamountProperty() {
-        return stockamount;
+        return StockAmount;
     }
 
     public long getStockAmount() {
         return stockamountProperty().get();
     }
 
-    public void setStockAmount(long stockamount) {
-        stockamountProperty().set(stockamount);
+    public void setStockAmount(long StockAmount) {
+        stockamountProperty().set(getAmountPaid());
     }
 
-    // stockpaid
-    public FXLongProperty stockpaidProperty() {
-        return stockpaid;
+    public FXIntegerProperty stockpaidProperty() {
+        return StockPaid;
     }
 
-    public long getStockPaid() {
+    public Integer getStockPaid() {
         return stockpaidProperty().get();
     }
 
-    public void setStockPaid(long stockpaid) {
-        stockpaidProperty().set(stockpaid);
+    public void setStockPaid(Integer StockPaid) {
+        stockpaidProperty().set(StockPaid);
     }
 
-    // amountPaid
-    public FXLongProperty amountPaidProperty() {
-        return amountPaid;
+    public FXLongProperty amountpaidProperty() {
+        return amountpaid;
     }
 
     public long getAmountPaid() {
-        return amountPaidProperty().get();
+        return amountpaidProperty().get();
     }
 
-    public void setAmountPaid(long amountPaid) {
-        amountPaidProperty().set(getAmountPaid());
+    public void setAmountPaid(long amountpaid) {
+        amountpaidProperty().set(amountpaid);
     }
 
     @Override
     public FXModel clone() {
-        return new Member(getMemberID(),
-                getLname(),
-                getFname(),
-                getMname(),
-                getBirthDate(),
-                getBirthPlace(),
-                getCivil_Status(),
-                getHomeAddress(),
-                getOccupation(),
-                getOffice(),
-                getSalary(),
-                getSourceOfIncome(),
-                getRelative(),
-                getRelationship(),
-                getDependent(),
-                getStockshare(),
-                getStockAmount(),
-                getStockPaid(),
-                getAmountPaid());
-        
+
+        Member member = new Member(getMemberID(), getFname(), getMname(), getLname(), getDateofBirth(),
+                getPlaceofBirth(), getStatus(), getCurrentAddress(), getOccupation(), getOffice(), getSalary(),
+                getSourceofincome(), getNearestRelative(), getRelationShip(), getDependent(), getStockshare(),
+                getStockAmount(), getStockPaid(), getAmountPaid());
+        return member;
 
     }
 
@@ -367,25 +333,23 @@ public class Member extends FXModel {
         Member c = (Member) arg0;
 
         setMemberID(c.getMemberID());
-        setLname(c.getLname());
         setFname(c.getFname());
         setMname(c.getMname());
-        setBirthDate(c.getBirthDate());
-        setBirthPlace(c.getBirthPlace());
-        setCivil_Status(c.getCivil_Status());
-        setHomeAddress(c.getHomeAddress());
+        setLname(c.getLname());
+        setAmountPaid(c.getAmountPaid());
+        setDateofBirth(getDateofBirth());
+        setPlaceofBirth(c.getPlaceofBirth());
+        setStatus(c.getStatus());
+        setCurrentAddress(c.getCurrentAddress());
         setOccupation(c.getOccupation());
         setOffice(c.getOffice());
-        setSalary(c.getAmountPaid());
-        setSourceOfIncome(c.getSourceOfIncome());
-        setRelative(c.getRelative());
-        setRelationship(c.getRelationship());
+        setSalary(c.getSalary());
+        setSourceofincome(c.getSourceofincome());
+        setNearestRelative(c.getNearestRelative());
+        setRelationShip(c.getRelationShip());
         setDependent(c.getDependent());
         setStockshare(c.getStockshare());
         setStockAmount(c.getStockAmount());
         setStockPaid(c.getStockPaid());
-        setAmountPaid(c.getAmountPaid());
-
     }
-
 }

@@ -146,8 +146,15 @@ public class DeliveryReceipt extends FXModel {
 
     @Override
     public void copy(FXModel arg0) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'copy'");
+        DeliveryReceipt c = (DeliveryReceipt) arg0;
+
+        setUserID(c.getUserID());
+        setDRNum(c.getDRNum());
+        setSupplierid(c.getSupplierId());
+        setDateDel(getDateDel());
+        setTotalAmt(getTotalAmt());
+        setPaidamt(getPaidAmt());
+        setDRID(c.getDRID());
     }
 
 }

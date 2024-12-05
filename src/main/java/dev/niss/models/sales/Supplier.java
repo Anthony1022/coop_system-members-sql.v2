@@ -68,8 +68,7 @@ public class Supplier extends FXModel {
 
     @Override
     public void copy(FXModel arg0) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'copy'");
+        Supplier c = (Supplier) arg0;
     }
 
 }

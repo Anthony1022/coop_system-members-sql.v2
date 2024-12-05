@@ -70,8 +70,12 @@ public class SalesItem extends FXModel {
 
     @Override
     public void copy(FXModel arg0) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'copy'");
+        SalesItem c = (SalesItem) arg0;
+
+        setSalesID(c.getSalesID());
+        setStockID(c.getStockID());
+        setQuantity(c.getQuantity());
+        setAmount(c.getAmount());
     }
     
 }
